@@ -41,18 +41,10 @@ Currently available Skyworks Solutions Video Demodulators are listed in
 
 The following TER Tuners are supported
 
-* Si2124
 * Si2141
 * Si2144
-* Si2146
-* Si2147
-* Si2148
 * Si2151
-* Si2156
-* Si2157
-* Si2176
 * Si2177
-* Si2178B
 
 Additional TER tuners can be supported via the CUSTOM_TER wrapper
 

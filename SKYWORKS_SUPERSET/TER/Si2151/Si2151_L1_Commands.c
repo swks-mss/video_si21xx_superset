@@ -21,9 +21,9 @@ limitations under the License.
    FILE: Si2151_L1_Commands.c
    Supported IC : Si2151
    Compiled for ROM 61 firmware 1_1_build_11
-   Revision: 0.6
-   Tag:  ROM61_1_1_build_11_V0.6
-   Date: October 11 2016
+   Revision: 0.7
+   Tag:  ROM61_1_1_build_11_V0.7
+   Date: June 09 2022
 **************************************************************************************/
 #define   Si2151_COMMAND_PROTOTYPES
 
@@ -1111,8 +1111,7 @@ unsigned char Si2151_L1_WAKE_UP         (L1_Si2151_Context *api,
                                          unsigned char   wake_up)
 {
     unsigned char error_code = 0;
-    unsigned char cmdByteBuffer[7];
-    //unsigned char rspByteBuffer[1];
+    unsigned char cmdByteBuffer[7];    
     api->rsp->wake_up.STATUS = api->status;
 
     SiTRACE("Si2151 WAKE_UP ");

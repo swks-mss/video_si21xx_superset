@@ -21,9 +21,9 @@ limitations under the License.
    FILE: Si2151_L1_Properties.c
    Supported IC : Si2151
    Compiled for ROM 61 firmware 1_1_build_11
-   Revision: 0.6
-   Tag:  ROM61_1_1_build_11_V0.6
-   Date: October 11 2016
+   Revision: 0.7
+   Tag:  ROM61_1_1_build_11_V0.7
+   Date: June 09 2022
 **************************************************************************************/
 #define   Si2151_COMMAND_PROTOTYPES
 
@@ -793,6 +793,124 @@ Si2151_fieldDicoStruct Si2151_TUNER_RETURN_LOSS_PROP_FIELDS[] =
   {"RESERVED", Si2151_UNSIGNED_CHAR, &Si2151_prop.tuner_return_loss.reserved, sizeof(Si2151_TUNER_RETURN_LOSS_PROP_RESERVED)/sizeof(Si2151_optionStruct), Si2151_TUNER_RETURN_LOSS_PROP_RESERVED},
 };
 
+Si2151_optionStruct    Si2151_WIDE_BAND_ATT_THRS_PROP_WB_ATT_THRS[] =
+{
+  {"AUTO",        0},
+  {"P6DBM",       6},
+  {"P5DBM",       7},
+  {"P4DBM",       8},
+  {"P3DBM",       9},
+  {"P2DBM",      10},
+  {"P1DBM",      11},
+  {"0DBM",       12},
+  {"M1DBM",      13},
+  {"M2DBM",      14},
+  {"M3DBM",      15},
+  {"M4DBM",      16},
+  {"M5DBM",      17},
+  {"M6DBM",      18},
+  {"M7DBM",      19},
+  {"M8DBM",      20},
+  {"M9DBM",      21},
+  {"M10DBM",     22},
+  {"M11DBM",     23},
+  {"M12DBM",     24},
+  {"DISABLE",   255},
+};
+Si2151_fieldDicoStruct Si2151_WIDE_BAND_ATT_THRS_PROP_FIELDS[] =
+{
+  {"WB_ATT_THRS", Si2151_UNSIGNED_CHAR, &Si2151_prop.wide_band_att_thrs.wb_att_thrs, sizeof(Si2151_WIDE_BAND_ATT_THRS_PROP_WB_ATT_THRS)/sizeof(Si2151_optionStruct), Si2151_WIDE_BAND_ATT_THRS_PROP_WB_ATT_THRS},
+};
+
+Si2151_optionStruct    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_THLD[] =
+{
+  {"MIN_RANGE",     0},
+  {"MAX_RANGE",     7}
+};
+Si2151_optionStruct    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_CONFIG[] =
+{
+  {"2",           0},
+  {"3",           1},
+  {"4",           2},
+  {"5",           3},
+  {"6",           4},
+  {"7",           5},
+  {"8",           6},
+  {"9",           7},
+  {"10",          8},
+  {"11",          9},
+  {"13",         10},
+  {"15",         11},
+  {"17",         12},
+  {"19",         13},
+  {"23",         14},
+  {"27",         15},
+  {"31",         16},
+  {"35",         17},
+  {"39",         18},
+  {"43",         19},
+  {"47",         20},
+  {"51",         21},
+  {"59",         22},
+  {"67",         23},
+  {"75",         24},
+  {"83",         25},
+  {"91",         26},
+  {"103",        27},
+  {"115",        28},
+  {"127",        29},
+  {"DISABLE",    30},
+};
+Si2151_optionStruct    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_ENGAGEMENT_DELAY[] =
+{
+  {"MIN_RANGE",     0},
+  {"MAX_RANGE",    15}
+};
+Si2151_optionStruct    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_DISENGAGEMENT_DELAY[] =
+{
+  {"MIN_RANGE",     0},
+  {"MAX_RANGE",    15}
+};
+Si2151_fieldDicoStruct Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_FIELDS[] =
+{
+  {"THLD",                Si2151_UNSIGNED_CHAR, &Si2151_prop.tuner_return_loss_optimize.thld               , sizeof(Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_THLD               )/sizeof(Si2151_optionStruct), Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_THLD               },
+  {"CONFIG",              Si2151_UNSIGNED_CHAR, &Si2151_prop.tuner_return_loss_optimize.config             , sizeof(Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_CONFIG             )/sizeof(Si2151_optionStruct), Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_CONFIG             },
+  {"ENGAGEMENT_DELAY",    Si2151_UNSIGNED_CHAR, &Si2151_prop.tuner_return_loss_optimize.engagement_delay   , sizeof(Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_ENGAGEMENT_DELAY   )/sizeof(Si2151_optionStruct), Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_ENGAGEMENT_DELAY   },
+  {"DISENGAGEMENT_DELAY", Si2151_UNSIGNED_CHAR, &Si2151_prop.tuner_return_loss_optimize.disengagement_delay, sizeof(Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_DISENGAGEMENT_DELAY)/sizeof(Si2151_optionStruct), Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_DISENGAGEMENT_DELAY},
+};
+
+Si2151_optionStruct    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_THLD[] =
+{
+  {"MIN_RANGE",     0},
+  {"MAX_RANGE",    31}
+};
+Si2151_optionStruct    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_WINDOW[] =
+{
+  {"MIN_RANGE",     0},
+  {"MAX_RANGE",     7}
+};
+Si2151_optionStruct    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_ENGAGEMENT_DELAY[] =
+{
+  {"MIN_RANGE",     0},
+  {"MAX_RANGE",    15}
+};
+Si2151_fieldDicoStruct Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_FIELDS[] =
+{
+  {"THLD",             Si2151_UNSIGNED_CHAR, &Si2151_prop.tuner_return_loss_optimize_2.thld            , sizeof(Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_THLD            )/sizeof(Si2151_optionStruct), Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_THLD            },
+  {"WINDOW",           Si2151_UNSIGNED_CHAR, &Si2151_prop.tuner_return_loss_optimize_2.window          , sizeof(Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_WINDOW          )/sizeof(Si2151_optionStruct), Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_WINDOW          },
+  {"ENGAGEMENT_DELAY", Si2151_UNSIGNED_CHAR, &Si2151_prop.tuner_return_loss_optimize_2.engagement_delay, sizeof(Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_ENGAGEMENT_DELAY)/sizeof(Si2151_optionStruct), Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_ENGAGEMENT_DELAY},
+};
+
+Si2151_optionStruct    Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP_TF1_BOUNDARY_OFFSET[] =
+{
+  {"MIN_RANGE",  -100},
+  {"MAX_RANGE",   100}
+};
+Si2151_fieldDicoStruct Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP_FIELDS[] =
+{
+  {"TF1_BOUNDARY_OFFSET",   Si2151_SIGNED_INT, &Si2151_prop.tuner_tf1_boundary_offset.tf1_boundary_offset, sizeof(Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP_TF1_BOUNDARY_OFFSET)/sizeof(Si2151_optionStruct), Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP_TF1_BOUNDARY_OFFSET},
+};
+
 Si2151_optionStruct    Si2151_XOUT_PROP_AMP[] =
 {
   {"HIGH",     0},
@@ -843,6 +961,10 @@ Si2151_propertyInfoStruct Si2151_propertyDictionary[] =
   {Si2151_TUNER , "TUNER_BLOCKED_VCO3"          , sizeof(Si2151_TUNER_BLOCKED_VCO3_PROP_FIELDS          )/sizeof(Si2151_fieldDicoStruct), Si2151_TUNER_BLOCKED_VCO3_PROP_FIELDS           , Si2151_TUNER_BLOCKED_VCO3_PROP           },
   {Si2151_TUNER , "TUNER_LO_INJECTION"          , sizeof(Si2151_TUNER_LO_INJECTION_PROP_FIELDS          )/sizeof(Si2151_fieldDicoStruct), Si2151_TUNER_LO_INJECTION_PROP_FIELDS           , Si2151_TUNER_LO_INJECTION_PROP           },
   {Si2151_TUNER , "TUNER_RETURN_LOSS"           , sizeof(Si2151_TUNER_RETURN_LOSS_PROP_FIELDS           )/sizeof(Si2151_fieldDicoStruct), Si2151_TUNER_RETURN_LOSS_PROP_FIELDS            , Si2151_TUNER_RETURN_LOSS_PROP            },
+  {Si2151_TUNER , "TUNER_RETURN_LOSS_OPTIMIZE"  , sizeof(Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_FIELDS  )/sizeof(Si2151_fieldDicoStruct), Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_FIELDS   , Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP   },
+  {Si2151_TUNER , "TUNER_RETURN_LOSS_OPTIMIZE_2", sizeof(Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_FIELDS)/sizeof(Si2151_fieldDicoStruct), Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_FIELDS , Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP },
+  {Si2151_TUNER , "TUNER_TF1_BOUNDARY_OFFSET"   , sizeof(Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP_FIELDS   )/sizeof(Si2151_fieldDicoStruct), Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP_FIELDS    , Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP    },
+  {Si2151_TUNER , "WIDE_BAND_ATT_THRS"          , sizeof(Si2151_WIDE_BAND_ATT_THRS_PROP_FIELDS          )/sizeof(Si2151_fieldDicoStruct), Si2151_WIDE_BAND_ATT_THRS_PROP_FIELDS           , Si2151_WIDE_BAND_ATT_THRS_PROP           },
 };
 
 int   Si2151_PropertyNames        (L1_Si2151_Context *api, char *msg)

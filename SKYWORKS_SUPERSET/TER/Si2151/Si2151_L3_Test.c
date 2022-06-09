@@ -21,9 +21,9 @@ limitations under the License.
    FILE: Si2151_L3_Test.c
    Supported IC : Si2151
    Compiled for ROM 61 firmware 1_1_build_11
-   Revision: 0.6
-   Tag:  ROM61_1_1_build_11_V0.6
-   Date: October 11 2016
+   Revision: 0.7
+   Tag:  ROM61_1_1_build_11_V0.7
+   Date: June 09 2022
 ****************************************************************************************/
 #include "Si2151_L3_Test.h"
 

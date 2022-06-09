@@ -21,9 +21,9 @@ limitations under the License.
    FILE: Si2151_L1_Properties.c
    Supported IC : Si2151
    Compiled for ROM 61 firmware 1_1_build_11
-   Revision: 0.6
-   Tag:  ROM61_1_1_build_11_V0.6
-   Date: October 11 2016
+   Revision: 0.7
+   Tag:  ROM61_1_1_build_11_V0.7
+   Date: June 09 2022
 
  |---------------------------------------------------------------------------------------------------------------------|
  | Do NOT change this code unless you really know what you're doing!                                                   |
@@ -272,6 +272,18 @@ int  Si2151_downloadTUNERProperties       (L1_Si2151_Context *api) {
 #ifdef    Si2151_TUNER_RETURN_LOSS_PROP
   if (Si2151_L1_SetProperty2(api, Si2151_TUNER_RETURN_LOSS_PROP_CODE           ) != NO_Si2151_ERROR) {return ERROR_Si2151_SENDING_COMMAND;}
 #endif /* Si2151_TUNER_RETURN_LOSS_PROP */
+#ifdef    Si2151_WIDE_BAND_ATT_THRS_PROP
+  if (Si2151_L1_SetProperty2(api, Si2151_WIDE_BAND_ATT_THRS_PROP_CODE          ) != NO_Si2151_ERROR) {return ERROR_Si2151_SENDING_COMMAND;}
+#endif /* Si2151_WIDE_BAND_ATT_THRS_PROP */
+#ifdef    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP
+  if (Si2151_L1_SetProperty2(api, Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_CODE  ) != NO_Si2151_ERROR) {return ERROR_Si2151_SENDING_COMMAND;}
+#endif /* Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP */
+#ifdef    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP
+  if (Si2151_L1_SetProperty2(api, Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_CODE) != NO_Si2151_ERROR) {return ERROR_Si2151_SENDING_COMMAND;}
+#endif /* Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP */
+#ifdef    Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP
+  if (Si2151_L1_SetProperty2(api, Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP_CODE   ) != NO_Si2151_ERROR) {return ERROR_Si2151_SENDING_COMMAND;}
+#endif /* Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP */
 return NO_Si2151_ERROR;
 }
 int  Si2151_downloadAllProperties         (L1_Si2151_Context *api) {
@@ -510,6 +522,31 @@ unsigned char Si2151_PackProperty            (Si2151_PropObj   *prop, unsigned i
               (prop->tuner_return_loss.reserved & Si2151_TUNER_RETURN_LOSS_PROP_RESERVED_MASK) << Si2151_TUNER_RETURN_LOSS_PROP_RESERVED_LSB ;
      break;
     #endif /*     Si2151_TUNER_RETURN_LOSS_PROP */
+    #ifdef        Si2151_WIDE_BAND_ATT_THRS_PROP
+     case         Si2151_WIDE_BAND_ATT_THRS_PROP_CODE:
+      *data = (prop->wide_band_att_thrs.wb_att_thrs & Si2151_WIDE_BAND_ATT_THRS_PROP_WB_ATT_THRS_MASK) << Si2151_WIDE_BAND_ATT_THRS_PROP_WB_ATT_THRS_LSB ;
+     break;
+    #endif /*     Si2151_WIDE_BAND_ATT_THRS_PROP */
+    #ifdef        Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP
+     case         Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_CODE:
+      *data = (prop->tuner_return_loss_optimize.thld                & Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_THLD_MASK               ) << Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_THLD_LSB  |
+              (prop->tuner_return_loss_optimize.config              & Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_CONFIG_MASK             ) << Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_CONFIG_LSB  |
+              (prop->tuner_return_loss_optimize.engagement_delay    & Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_ENGAGEMENT_DELAY_MASK   ) << Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_ENGAGEMENT_DELAY_LSB  |
+              (prop->tuner_return_loss_optimize.disengagement_delay & Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_DISENGAGEMENT_DELAY_MASK) << Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_DISENGAGEMENT_DELAY_LSB ;
+     break;
+    #endif /*     Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP */
+    #ifdef        Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP
+     case         Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_CODE:
+      *data = (prop->tuner_return_loss_optimize_2.thld             & Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_THLD_MASK            ) << Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_THLD_LSB  |
+              (prop->tuner_return_loss_optimize_2.window           & Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_WINDOW_MASK          ) << Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_WINDOW_LSB  |
+              (prop->tuner_return_loss_optimize_2.engagement_delay & Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_ENGAGEMENT_DELAY_MASK) << Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_ENGAGEMENT_DELAY_LSB ;
+     break;
+    #endif /*     Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP */
+    #ifdef        Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP
+     case         Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP_CODE:
+      *data = (prop->tuner_tf1_boundary_offset.tf1_boundary_offset & Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP_TF1_BOUNDARY_OFFSET_MASK) << Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP_TF1_BOUNDARY_OFFSET_LSB ;
+     break;
+    #endif /*     Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP */
     #ifdef        Si2151_XOUT_PROP
      case         Si2151_XOUT_PROP_CODE:
       *data = (prop->xout.amp & Si2151_XOUT_PROP_AMP_MASK) << Si2151_XOUT_PROP_AMP_LSB ;
@@ -749,6 +786,31 @@ unsigned char Si2151_UnpackProperty          (Si2151_PropObj   *prop, unsigned i
                prop->tuner_return_loss.reserved = (data >> Si2151_TUNER_RETURN_LOSS_PROP_RESERVED_LSB) & Si2151_TUNER_RETURN_LOSS_PROP_RESERVED_MASK;
      break;
     #endif /*     Si2151_TUNER_RETURN_LOSS_PROP */
+    #ifdef        Si2151_WIDE_BAND_ATT_THRS_PROP
+     case         Si2151_WIDE_BAND_ATT_THRS_PROP_CODE:
+               prop->wide_band_att_thrs.wb_att_thrs = (data >> Si2151_WIDE_BAND_ATT_THRS_PROP_WB_ATT_THRS_LSB) & Si2151_WIDE_BAND_ATT_THRS_PROP_WB_ATT_THRS_MASK;
+     break;
+    #endif /*     Si2151_WIDE_BAND_ATT_THRS_PROP */
+    #ifdef        Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP
+     case         Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_CODE:
+               prop->tuner_return_loss_optimize.thld                = (data >> Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_THLD_LSB               ) & Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_THLD_MASK;
+               prop->tuner_return_loss_optimize.config              = (data >> Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_CONFIG_LSB             ) & Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_CONFIG_MASK;
+               prop->tuner_return_loss_optimize.engagement_delay    = (data >> Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_ENGAGEMENT_DELAY_LSB   ) & Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_ENGAGEMENT_DELAY_MASK;
+               prop->tuner_return_loss_optimize.disengagement_delay = (data >> Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_DISENGAGEMENT_DELAY_LSB) & Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_DISENGAGEMENT_DELAY_MASK;
+     break;
+    #endif /*     Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP */
+    #ifdef        Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP
+     case         Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_CODE:
+               prop->tuner_return_loss_optimize_2.thld             = (data >> Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_THLD_LSB            ) & Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_THLD_MASK;
+               prop->tuner_return_loss_optimize_2.window           = (data >> Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_WINDOW_LSB          ) & Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_WINDOW_MASK;
+               prop->tuner_return_loss_optimize_2.engagement_delay = (data >> Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_ENGAGEMENT_DELAY_LSB) & Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_ENGAGEMENT_DELAY_MASK;
+     break;
+    #endif /*     Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP */
+    #ifdef        Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP
+     case         Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP_CODE:
+               prop->tuner_tf1_boundary_offset.tf1_boundary_offset = (data >> Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP_TF1_BOUNDARY_OFFSET_LSB) & Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP_TF1_BOUNDARY_OFFSET_MASK;
+     break;
+    #endif /*     Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP */
     #ifdef        Si2151_XOUT_PROP
      case         Si2151_XOUT_PROP_CODE:
                prop->xout.amp = (data >> Si2151_XOUT_PROP_AMP_LSB) & Si2151_XOUT_PROP_AMP_MASK;
@@ -955,6 +1017,27 @@ void          Si2151_storePropertiesDefaults (Si2151_PropObj   *prop) {
   prop->tuner_return_loss.mode               = Si2151_TUNER_RETURN_LOSS_PROP_MODE_TERRESTRIAL     ; /* (default 'TERRESTRIAL') */
   prop->tuner_return_loss.reserved           = Si2151_TUNER_RETURN_LOSS_PROP_RESERVED_RESERVED    ; /* (default 'RESERVED') */
 #endif /* Si2151_TUNER_RETURN_LOSS_PROP */
+
+#ifdef    Si2151_WIDE_BAND_ATT_THRS_PROP
+  prop->wide_band_att_thrs.wb_att_thrs       = Si2151_WIDE_BAND_ATT_THRS_PROP_WB_ATT_THRS_AUTO ; /* (default 'AUTO') */
+#endif /* Si2151_WIDE_BAND_ATT_THRS_PROP */
+
+#ifdef    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP
+  prop->tuner_return_loss_optimize.thld                 =     0; /* (default     0) */
+  prop->tuner_return_loss_optimize.config               = Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_CONFIG_DISABLE              ; /* (default 'DISABLE') */
+  prop->tuner_return_loss_optimize.engagement_delay     =     7; /* (default     7) */
+  prop->tuner_return_loss_optimize.disengagement_delay  =    10; /* (default    10) */
+#endif /* Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP */
+
+#ifdef    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP
+  prop->tuner_return_loss_optimize_2.thld               =    31; /* (default    31) */
+  prop->tuner_return_loss_optimize_2.window             =     0; /* (default     0) */
+  prop->tuner_return_loss_optimize_2.engagement_delay   =    15; /* (default    15) */
+#endif /* Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP */
+
+#ifdef    Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP
+  prop->tuner_tf1_boundary_offset.tf1_boundary_offset   =     0; /* (default     0) */
+#endif /* Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP */
 
 }
 #ifdef    Si2151_GET_PROPERTY_STRING
@@ -1524,6 +1607,89 @@ unsigned char Si2151_L1_PropertyText          (Si2151_PropObj   *prop, unsigned 
       else                                              sprintf(msg,"%s%d", msg, prop->tuner_return_loss.mode);
      break;
     #endif /*     Si2151_TUNER_RETURN_LOSS_PROP */
+    #ifdef        Si2151_WIDE_BAND_ATT_THRS_PROP
+     case         Si2151_WIDE_BAND_ATT_THRS_PROP_CODE:
+      sprintf(msg,"WIDE_BAND_ATT_THRS");
+       strcat(msg,separator); strcat(msg,"-WB_ATT_THRS ");
+           if  (prop->wide_band_att_thrs.wb_att_thrs ==     0) strcat(msg,"AUTO    ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==     6) strcat(msg,"P6DBM   ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==     7) strcat(msg,"P5DBM   ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==     8) strcat(msg,"P4DBM   ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==     9) strcat(msg,"P3DBM   ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==    10) strcat(msg,"P2DBM   ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==    11) strcat(msg,"P1DBM   ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==    12) strcat(msg,"0DBM    ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==    13) strcat(msg,"M1DBM   ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==    14) strcat(msg,"M2DBM   ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==    15) strcat(msg,"M3DBM   ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==    16) strcat(msg,"M4DBM   ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==    17) strcat(msg,"M5DBM   ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==    18) strcat(msg,"M6DBM   ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==    19) strcat(msg,"M7DBM   ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==    20) strcat(msg,"M8DBM   ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==    21) strcat(msg,"M9DBM   ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==    22) strcat(msg,"M10DBM  ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==    23) strcat(msg,"M11DBM  ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==    24) strcat(msg,"M12DBM  ");
+      else if  (prop->wide_band_att_thrs.wb_att_thrs ==   255) strcat(msg,"DISABLE ");
+      else                                                    sprintf(msg,"%s%d", msg, prop->wide_band_att_thrs.wb_att_thrs);
+     break;
+    #endif /*     Si2151_WIDE_BAND_ATT_THRS_PROP */
+    #ifdef        Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP
+     case         Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_CODE:
+      sprintf(msg,"TUNER_RETURN_LOSS_OPTIMIZE");
+       strcat(msg,separator); strcat(msg,"-THLD "); sprintf(msg,"%s%d", msg, prop->tuner_return_loss_optimize.thld);
+       strcat(msg,separator); strcat(msg,"-CONFIG ");
+           if  (prop->tuner_return_loss_optimize.config              ==     0) strcat(msg,"2       ");
+      else if  (prop->tuner_return_loss_optimize.config              ==     1) strcat(msg,"3       ");
+      else if  (prop->tuner_return_loss_optimize.config              ==     2) strcat(msg,"4       ");
+      else if  (prop->tuner_return_loss_optimize.config              ==     3) strcat(msg,"5       ");
+      else if  (prop->tuner_return_loss_optimize.config              ==     4) strcat(msg,"6       ");
+      else if  (prop->tuner_return_loss_optimize.config              ==     5) strcat(msg,"7       ");
+      else if  (prop->tuner_return_loss_optimize.config              ==     6) strcat(msg,"8       ");
+      else if  (prop->tuner_return_loss_optimize.config              ==     7) strcat(msg,"9       ");
+      else if  (prop->tuner_return_loss_optimize.config              ==     8) strcat(msg,"10      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==     9) strcat(msg,"11      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    10) strcat(msg,"13      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    11) strcat(msg,"15      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    12) strcat(msg,"17      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    13) strcat(msg,"19      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    14) strcat(msg,"23      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    15) strcat(msg,"27      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    16) strcat(msg,"31      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    17) strcat(msg,"35      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    18) strcat(msg,"39      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    19) strcat(msg,"43      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    20) strcat(msg,"47      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    21) strcat(msg,"51      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    22) strcat(msg,"59      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    23) strcat(msg,"67      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    24) strcat(msg,"75      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    25) strcat(msg,"83      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    26) strcat(msg,"91      ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    27) strcat(msg,"103     ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    28) strcat(msg,"115     ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    29) strcat(msg,"127     ");
+      else if  (prop->tuner_return_loss_optimize.config              ==    30) strcat(msg,"DISABLE ");
+      else                                                                    sprintf(msg,"%s%d", msg, prop->tuner_return_loss_optimize.config);
+       strcat(msg,separator); strcat(msg,"-ENGAGEMENT_DELAY "); sprintf(msg,"%s%d", msg, prop->tuner_return_loss_optimize.engagement_delay);
+       strcat(msg,separator); strcat(msg,"-DISENGAGEMENT_DELAY "); sprintf(msg,"%s%d", msg, prop->tuner_return_loss_optimize.disengagement_delay);
+     break;
+    #endif /*     Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP */
+    #ifdef        Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP
+     case         Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_CODE:
+      sprintf(msg,"TUNER_RETURN_LOSS_OPTIMIZE_2");
+       strcat(msg,separator); strcat(msg,"-THLD "); sprintf(msg,"%s%d", msg, prop->tuner_return_loss_optimize_2.thld);
+       strcat(msg,separator); strcat(msg,"-WINDOW "); sprintf(msg,"%s%d", msg, prop->tuner_return_loss_optimize_2.window);
+       strcat(msg,separator); strcat(msg,"-ENGAGEMENT_DELAY "); sprintf(msg,"%s%d", msg, prop->tuner_return_loss_optimize_2.engagement_delay);
+     break;
+    #endif /*     Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP */
+    #ifdef        Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP
+     case         Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP_CODE:
+      sprintf(msg,"TUNER_TF1_BOUNDARY_OFFSET");
+       strcat(msg,separator); strcat(msg,"-TF1_BOUNDARY_OFFSET "); sprintf(msg,"%s%d", msg, prop->tuner_tf1_boundary_offset.tf1_boundary_offset);
+     break;
+    #endif /*     Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP */
     #ifdef        Si2151_XOUT_PROP
      case         Si2151_XOUT_PROP_CODE:
       sprintf(msg,"XOUT");

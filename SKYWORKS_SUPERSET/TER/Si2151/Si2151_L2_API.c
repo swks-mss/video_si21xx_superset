@@ -21,9 +21,9 @@ limitations under the License.
    FILE: Si2151_L2_API.c
    Supported IC : Si2151
    Compiled for ROM 61 firmware 1_1_build_11
-   Revision: 0.6
-   Tag:  ROM61_1_1_build_11_V0.6
-   Date: October 11 2016
+   Revision: 0.7
+   Tag:  ROM61_1_1_build_11_V0.7
+   Date: June 09 2022
 ****************************************************************************************/
 #include <string.h>
 /* Si2151 API Defines */
@@ -718,6 +718,29 @@ int  Si2151_ATVTune                   (L1_Si2151_Context *api, unsigned long fre
       return ERROR_Si2151_SENDING_COMMAND;
     }
 
+	/* In ATV application, following optimize values for DTMB application should be set back to their defaults */
+    api->prop->tuner_return_loss_optimize.config               =    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_CONFIG_DISABLE;
+	api->prop->tuner_return_loss_optimize.thld                 =    0;
+    api->prop->tuner_return_loss_optimize.engagement_delay     =    7;
+    api->prop->tuner_return_loss_optimize.disengagement_delay  =    10;
+    api->prop->tuner_return_loss_optimize_2.thld               =    31; /* (default    31) */
+    api->prop->tuner_return_loss_optimize_2.window             =    0;  /* (default     0) */
+    api->prop->tuner_return_loss_optimize_2.engagement_delay   =    15; /* (default    15) */
+    api->prop->tuner_tf1_boundary_offset.tf1_boundary_offset   =    0;
+    
+    if (Si2151_L1_SetProperty2(api, Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP) != NO_Si2151_ERROR)
+    {
+      return ERROR_Si2151_SENDING_COMMAND;
+    }
+    if (Si2151_L1_SetProperty2(api, Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP) != NO_Si2151_ERROR)
+    {
+      return ERROR_Si2151_SENDING_COMMAND;
+    }
+    if (Si2151_L1_SetProperty2(api, Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP) != NO_Si2151_ERROR)
+    {
+      return ERROR_Si2151_SENDING_COMMAND;
+    }
+	
     return Si2151_Tune (api, Si2151_TUNER_TUNE_FREQ_CMD_MODE_ATV, freq);
 }
  /************************************************************************************************************************
@@ -741,6 +764,40 @@ int  Si2151_DTVTune                   (L1_Si2151_Context *api, unsigned long fre
     api->prop->dtv_mode.invert_spectrum = invert_spectrum;
     api->prop->dtv_mode.modulation = modulation;
     if (Si2151_L1_SetProperty2(api, Si2151_DTV_MODE_PROP) != NO_Si2151_ERROR)
+    {
+      return ERROR_Si2151_SENDING_COMMAND;
+    }
+    /* Set the Tuner return loss optimize and TF1 boundary if in DTMB mode, otherwise reset it to default values */
+    if (modulation==Si2151_DTV_MODE_PROP_MODULATION_DTMB)
+    {
+        api->prop->tuner_return_loss_optimize.config               =    91;
+        api->prop->tuner_return_loss_optimize_2.thld               =    15; /* (default    31) */
+        api->prop->tuner_return_loss_optimize_2.window             =    5;  /* (default     0) */
+        api->prop->tuner_return_loss_optimize_2.engagement_delay   =    3;  /* (default    15) */
+        api->prop->tuner_tf1_boundary_offset.tf1_boundary_offset   =    22;
+    }
+    else
+    {
+        api->prop->tuner_return_loss_optimize.config               =    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_CONFIG_DISABLE;
+        api->prop->tuner_return_loss_optimize_2.thld               =    31; /* (default    31) */
+        api->prop->tuner_return_loss_optimize_2.window             =    0;  /* (default     0) */
+        api->prop->tuner_return_loss_optimize_2.engagement_delay   =    15; /* (default    15) */
+        api->prop->tuner_tf1_boundary_offset.tf1_boundary_offset   =    0;
+    }
+    /* set the remaining optimize values to their defaults */
+    api->prop->tuner_return_loss_optimize.thld                 =     0;
+    api->prop->tuner_return_loss_optimize.engagement_delay     =     7;
+    api->prop->tuner_return_loss_optimize.disengagement_delay  =    10;
+
+    if (Si2151_L1_SetProperty2(api, Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP) != NO_Si2151_ERROR)
+    {
+      return ERROR_Si2151_SENDING_COMMAND;
+    }
+    if (Si2151_L1_SetProperty2(api, Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP) != NO_Si2151_ERROR)
+    {
+      return ERROR_Si2151_SENDING_COMMAND;
+    }
+    if (Si2151_L1_SetProperty2(api, Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP) != NO_Si2151_ERROR)
     {
       return ERROR_Si2151_SENDING_COMMAND;
     }
@@ -1529,7 +1586,7 @@ int Si2151_L2_VCO_Blocking_PreTune    (L1_Si2151_Context *tuners[], int tuner_nu
 int Si2151_L2_VCO_Blocking_PostTune   (L1_Si2151_Context *tuners[], int tuner_num, int tuner_count)
 {
 
-  int  ((*Tuner_Block_VCO_ptr[3])( )) = {Si2151_Tuner_Block_VCO, Si2151_Tuner_Block_VCO2, Si2151_Tuner_Block_VCO3};
+  int  ((*Tuner_Block_VCO_ptr[3])(L1_Si2151_Context *api, int vco_code)) = {Si2151_Tuner_Block_VCO, Si2151_Tuner_Block_VCO2, Si2151_Tuner_Block_VCO3};
   int errcode;
   int vco_dest[]={0,0,0,0};
   int vco_fn[]={0,0,0,0};

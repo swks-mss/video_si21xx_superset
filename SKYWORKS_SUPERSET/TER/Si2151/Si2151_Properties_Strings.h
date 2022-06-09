@@ -21,9 +21,9 @@ limitations under the License.
    FILE: Si2151_Properties_Strings.h
    Supported IC : Si2151
    Compiled for ROM 61 firmware 1_1_build_11
-   Revision: 0.6
-   Date: October 11 2016
-   Tag: ROM61_1_1_build_11_V0.6
+   Revision: 0.7
+   Date: June 09 2022
+   Tag: ROM61_1_1_build_11_V0.7
 **************************************************************************************/
 #ifndef   _Si2151_PROPERTIES_STRINGS_H_
 #define   _Si2151_PROPERTIES_STRINGS_H_
@@ -209,6 +209,23 @@ extern Si2151_optionStruct    Si2151_TUNER_RETURN_LOSS_PROP_CONFIG[];
 extern Si2151_optionStruct    Si2151_TUNER_RETURN_LOSS_PROP_MODE[];
 extern Si2151_optionStruct    Si2151_TUNER_RETURN_LOSS_PROP_RESERVED[];
 extern Si2151_fieldDicoStruct Si2151_TUNER_RETURN_LOSS_PROP_FIELDS[];
+
+extern Si2151_optionStruct    Si2151_WIDE_BAND_ATT_THRS_PROP_WB_ATT_THRS[];
+extern Si2151_fieldDicoStruct Si2151_WIDE_BAND_ATT_THRS_PROP_FIELDS[];
+
+extern Si2151_optionStruct    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_THLD[];
+extern Si2151_optionStruct    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_CONFIG[];
+extern Si2151_optionStruct    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_ENGAGEMENT_DELAY[];
+extern Si2151_optionStruct    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_DISENGAGEMENT_DELAY[];
+extern Si2151_fieldDicoStruct Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_FIELDS[];
+
+extern Si2151_optionStruct    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_THLD[];
+extern Si2151_optionStruct    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_WINDOW[];
+extern Si2151_optionStruct    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_ENGAGEMENT_DELAY[];
+extern Si2151_fieldDicoStruct Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP_FIELDS[];
+
+extern Si2151_optionStruct    Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP_TF1_BOUNDARY_OFFSET[];
+extern Si2151_fieldDicoStruct Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP_FIELDS[];
 
 extern Si2151_optionStruct    Si2151_XOUT_PROP_AMP[];
 extern Si2151_fieldDicoStruct Si2151_XOUT_PROP_FIELDS[];

@@ -21,9 +21,9 @@ limitations under the License.
    FILE: Si2151_User_Properties.c
    Supported IC : Si2151
    Compiled for ROM 61 firmware 1_1_build_11
-   Revision: 0.6
-   Tag:  ROM61_1_1_build_11_V0.6
-   Date: October 11 2016
+   Revision: 0.7
+   Tag:  ROM61_1_1_build_11_V0.7
+   Date: June 09 2022
 
 
    Modify this file for the individual application.    The modified properties will be
@@ -235,5 +235,26 @@ void          Si2151_storeUserProperties    (Si2151_PropObj   *prop) {
   prop->tuner_return_loss.mode               = Si2151_TUNER_RETURN_LOSS_PROP_MODE_TERRESTRIAL   ; /* (default 'TERRESTRIAL') */
   prop->tuner_return_loss.reserved           = Si2151_TUNER_RETURN_LOSS_PROP_RESERVED_RESERVED    ; /* (default 'RESERVED') */
 #endif /* Si2151_TUNER_RETURN_LOSS_PROP */
+
+#ifdef    Si2151_WIDE_BAND_ATT_THRS_PROP
+  prop->wide_band_att_thrs.wb_att_thrs       = Si2151_WIDE_BAND_ATT_THRS_PROP_WB_ATT_THRS_AUTO ; /* (default 'AUTO') */
+#endif /* Si2151_WIDE_BAND_ATT_THRS_PROP */
+
+#ifdef    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP
+  prop->tuner_return_loss_optimize.thld                 =     0; /* (default     0) */
+  prop->tuner_return_loss_optimize.config               = Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP_CONFIG_DISABLE              ; /* (default 'DISABLE') */
+  prop->tuner_return_loss_optimize.engagement_delay     =     7; /* (default     7) */
+  prop->tuner_return_loss_optimize.disengagement_delay  =    10; /* (default    10) */
+#endif /* Si2151_TUNER_RETURN_LOSS_OPTIMIZE_PROP */
+
+#ifdef    Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP
+  prop->tuner_return_loss_optimize_2.thld               =    31; /* (default    31) */
+  prop->tuner_return_loss_optimize_2.window             =     0; /* (default     0) */
+  prop->tuner_return_loss_optimize_2.engagement_delay   =    15; /* (default    15) */
+#endif /* Si2151_TUNER_RETURN_LOSS_OPTIMIZE_2_PROP */
+
+#ifdef    Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP
+  prop->tuner_tf1_boundary_offset.tf1_boundary_offset   =     0; /* (default     0) */
+#endif /* Si2151_TUNER_TF1_BOUNDARY_OFFSET_PROP */
 
 }

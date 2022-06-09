@@ -21,8 +21,8 @@ limitations under the License.
    FILE: Si2151_typedefs.h
    Supported IC : Si2151
    Compiled for ROM 61 firmware 1_1_build_11
-   Revision: 0.6
-   Date: October 11 2016
+   Revision: 0.7
+   Date: June 09 2022
 **************************************************************************************/
 #ifndef   Si2151_TYPEDEFS_H
 #define   Si2151_TYPEDEFS_H

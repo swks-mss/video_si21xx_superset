@@ -21,8 +21,8 @@ limitations under the License.
    FILE: Si2151_Properties_Functions.h
    Supported IC : Si2151
    Compiled for ROM 61 firmware 1_1_build_11
-   Revision: 0.6
-   Date: October 11 2016
+   Revision: 0.7
+   Date: June 09 2022
 **************************************************************************************/
 #ifndef   _Si2151_PROPERTIES_FUNCTIONS_H_
 #define   _Si2151_PROPERTIES_FUNCTIONS_H_
